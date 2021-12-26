@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
 import './App.css';
+import MainApp from './Components/MainApp/index'
+import LogIn from './Components/LogIn/index'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import {useState, useEffect} from "react"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+  const [user, setUser] = useState({username: "", password: ""})
+  const [error, setError] = useState("")
+
+  const Input = details => { console.log (details) }
+  const Logout = () => {console.log('Log out')}
+
+  return (     
+    <Router>
+      <div id = "main">
+          <div className = "content">
+          <Routes>
+            <Route path="*" element = {<MainApp/>}/>
+            {(user.username != "") ? (
+              <div>
+                <h2>Welcome back</h2>
+              </div>
+            ):
+            <Route path="/login" element={<LogIn Input = {Input} error = {error}/>}/>
+          }
+          </Routes>
+          </div>
+      </div>
+      
+    </Router>
   );
 }
 
