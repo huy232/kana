@@ -1,6 +1,7 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
 import './App.css';
+import "swiper/css/bundle";
 import MainApp from './Components/MainApp/index'
 import LogIn from './Components/LogIn/index'
 import {
