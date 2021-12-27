@@ -10,14 +10,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 280px;
   }
   .swiper-slide img {
     display: block;
     box-sizing: border-box;
     border: none;
     margin: auto;
-    max-width: auto;
-    min-width: auto;
+    max-width: 250px;
+    min-width: 250px;
     max-height: 350px;
     min-height: 350px;
     -o-object-fit: cover;
@@ -28,4 +29,10 @@
   .swiper {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .swiper-slide img:hover {
+    transform: scale(1.2);
+    transition: all 0.5s ease-in-out;
+    opacity: 0.8;
   }
