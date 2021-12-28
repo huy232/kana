@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import { useState, useEffect } from "react"
@@ -11,12 +12,17 @@ SwiperCore.use([Pagination,Navigation]);
 function Home(){
     
     const [animeDetail, setAnimeDetail] = useState([])
-    const [swiperIndex, setSwiperIndex] = useState(0)
+    const [swiperIndex, setSwiperIndex] = useState(3)
 
     useEffect(async ()=>{
         fetchAnime()
     }, [])
 
+    
+    if (animeDetail.length === 0) {
+        console.log('Loading')
+        return <div>Loading</div>
+    }
 
     async function fetchAnime() {
         const { data } = await supabase
@@ -33,15 +39,14 @@ function Home(){
         <div className="home-section">
             <h2>Home Page</h2>
             <Swiper
-            initialSlide = {4}
+            initialSlide={3}
             centeredSlides={true}
-            slidesPerView={7}
-            spaceBetween={10}
+            centeredSlidesBounds={true}
+            slidesPerView = {6}
+            spaceBetween={0}
             loop={true}
-            pagination={false} 
-            // I use onActiveIndexChange to track current active index
-            // and update its state using setSwiperIndex
-            onActiveIndexChange={(swiperCore) => {setSwiperIndex(swiperCore.activeIndex)}}
+            pagination={false}
+            onActiveIndexChange={(swiperCore) => {setSwiperIndex(swiperCore.realIndex)}}
             navigation={true} className="mySwiper">
                 {animeDetail.map((element, i)=> 
                     (
@@ -51,8 +56,12 @@ function Home(){
                     )
                     )}
             </Swiper>
-        {/* I tried to call it down here to see whenever I change my slide, will it update the index, but it doesn't */}
+        {/* Current index of active slide */}
         {console.log(swiperIndex)}
+        {/* The specific info contains on active slide */}
+        {console.log(animeDetail[swiperIndex])}
+        {/* An array list contains each anime */}
+        {console.log(animeDetail)}
         </div>
         </>
     )

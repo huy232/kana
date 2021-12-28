@@ -2,48 +2,31 @@
     position: relative;
     height: auto
   }
-  .swiper {
+
+  .swiper{
     width: 100%;
     height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    overflow:visible;
   }
-  .swiper-slide {
+
+  .swiper-slide{
+
     text-align: center;
-    font-size: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 280px;
   }
+
   .swiper-slide img {
-    display: block;
-    box-sizing: border-box;
-    border: none;
-    max-height: 350px;
-    min-height: 350px;
-    -o-object-fit: cover;
-       object-fit: cover;
-    transition: all .3s ease;
-    opacity: 0.5
+    float: left;
+    width: 100%;
+    height: 350px;
+    -o-object-fit: cover scale-down scale-down;
+       object-fit: cover scale-down;
+    opacity: 0.4
   }
 
-  .swiper-slide-active {
-    z-index: 2
-  }
   .swiper-slide-active img{
-    transition: all .3 ease;
-    opacity: 1;
-    z-index: 2;
-  }
-
-  .displayNone {
-    display: none
-  }
-
-  /* .swiper-slide img:hover {
-    transform: scale(1.2);
     transition: all 0.5s ease-in-out;
-    opacity: 0.8;
-  } */
+    opacity: 1
+
+  }
