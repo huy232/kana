@@ -19,9 +19,10 @@ import {
             <div className = "content">
             <AnimeWatch/>
             <Routes>
-              <Route path="/" element = {<Home/>}/>
+              <Route exact path="/" element = {<Home/>}/>
               <Route path="/anime-list" element={<AnimeList/>}/>
               <Route path="/anime/detail/:id" element={<AnimeDetail/>}/>
+              <Route path="/watch/:id/:episode" element={<AnimeWatch/>}/>
             </Routes>
 
             </div>
