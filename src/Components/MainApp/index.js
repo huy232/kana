@@ -17,7 +17,6 @@ import {
             &nbsp;
             </div>
             <div className = "content">
-            <AnimeWatch/>
             <Routes>
               <Route exact path="/" element = {<Home/>}/>
               <Route path="/anime-list" element={<AnimeList/>}/>
