@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
 
 SwiperCore.use([Pagination,Navigation]);
+
 function Home(){
     
     const [animeDetail, setAnimeDetail] = useState([])
@@ -38,10 +39,10 @@ function Home(){
     async function fetchAnimeList() {
         const { data } = await supabase
             .from ('animes')
-            .select ()
-            .limit(100)
+            .select ('*')
             setAnimeList(data)
     }
+    
 
     return (
         <>
@@ -84,6 +85,7 @@ function Home(){
                     <Link to = {"/anime/detail/" + element.id}>
                     <img className="fas fa-play" src={element.anime_image}/>
                     </Link>
+                    <p>{element.anime_title}</p>
                 </div>
                 )}
             </div>
