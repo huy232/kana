@@ -15,7 +15,6 @@ SwiperCore.use([Pagination,Navigation]);
 
 function Home(){
     const [animeSwiper, setAnimeSwiper] = useState([])
-    const [animeDetail, setAnimeDetail] = useState([])
     const [animeList, setAnimeList] = useState([])
     const [swiperIndex, setSwiperIndex] = useState(3)
    
@@ -89,28 +88,16 @@ function Home(){
                     )
                     )}
             </Swiper>
-        {/* Current index of active slide */}
-        {/* {console.log(swiperIndex)} */}
-        {/* The specific info contains on active slide */}
-        {/* {console.log(animeDetail[swiperIndex])} */}
             <div className="anime-info-container" style={
-                {backgroundImage:`url(${animeSwiper[swiperIndex].anime_background}), linear-gradient(77deg, rgba(0,0,0,.8) 25%, transparent 85%)`, 
+                {backgroundImage:`url(${animeSwiper[swiperIndex].anime_background}),
+                 linear-gradient(77deg, rgba(0,0,0,.8) 25%, transparent 85%)`, 
                  backgroundColor: `transparent`,
-                height: `100%`}
+                 height: `100%`}
                 }>
                 <h1 className = "anime-info-title">{animeSwiper[swiperIndex].anime_title}</h1>
-                {/* <p className = "anime-info-description">{animeDetail[swiperIndex].anime_description}</p> */}
             </div>
             <h2>Anime List of Today</h2>
             <div className="anime-list">
-                {/* {animeList.map((element, i)=> 
-                <div className = "anime-item" key = {i}>
-                    <Link to = {"/anime/detail/" + element.id}>
-                    <img className="fas fa-play" src={element.anime_image}/>
-                    </Link>
-                    <p>{element.anime_title}</p>
-                </div>
-                )} */}
                 {displayAnime}
                 <ReactPaginate
                     previousLabel={"Previous"}

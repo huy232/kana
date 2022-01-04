@@ -2,10 +2,13 @@
 import { useState, useEffect } from "react"
 import { supabase } from '../../supabaseClient'
 import { useParams } from 'react-router-dom'
+import './animewatch.css'
+import ReactNetflixPlayer from "react-netflix-player"
 import axios from 'axios'         
 
 
 function AnimeWatch() {
+    const [animeInfoPlayer, setAnimeInfoPlayer] = useState([])
     const [animeEpisode, setAnimeEpisode] = useState(0)
     const [animeWatch, setAnimeWatch] = useState('')
     let animeInfo = useParams()
@@ -20,13 +23,14 @@ function AnimeWatch() {
         .from('animes')
         .select('id, anime_title')
         .match({id: infoMainID})
-
+        
         const {data: secondData} = await supabase
         .from(`anime_detail`)
         .select(`anime_title, anime_url, anime_episode`)
         .match({anime_title: data[0].anime_title, anime_episode: animeEpisode})
         // console.log(data[0].anime_title)
         // console.log(animeEpisode)
+
 
         await axios.post(url, {animeURL: secondData[0].anime_url, animeTitle: data[0].anime_title, anime_episode: animeEpisode})
         .then(res => console.log(res.data))
@@ -36,19 +40,26 @@ function AnimeWatch() {
         .from(`anime_detail`)
         .select(`anime_title, anime_url, anime_episode, anime_video`)
         .match({anime_title: data[0].anime_title, anime_episode: animeEpisode})
+        setAnimeWatch(finalData[0].anime_video)
         const delayTime = setTimeout(()=> {
             setAnimeWatch(finalData[0].anime_video)
         }, 3000)
         return () => clearTimeout(delayTime)
+
     })
 
     return (
         <>
-        {console.log(animeWatch)}
-        {animeWatch === '' || animeWatch == null? <div>Loading movie</div> :
+        {/* {animeWatch === '' || animeWatch == null? <div>Loading movie</div> :
         <video width="100%" height="auto" controls key = {animeWatch}>
         <source src = {animeWatch} type = "video/mp4"/>
-        </video>}      
+        </video>} */}
+        
+        <ReactNetflixPlayer
+        key = {animeWatch}
+        src = {animeWatch}
+        playerLanguage="en"
+        />      
         </>
 
 
