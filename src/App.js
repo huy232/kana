@@ -9,29 +9,15 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import {useState, useEffect} from "react"
+import {useState} from "react"
 
 function App() {
-
-  const [user, setUser] = useState({username: "", password: ""})
-  const [error, setError] = useState("")
-
-  const Input = details => { console.log (details) }
-  const Logout = () => {console.log('Log out')}
-
   return (     
     <Router>
       <div id = "main">
           <div className = "content">
           <Routes>
             <Route path="*" element = {<MainApp/>}/>
-            {(user.username != "") ? (
-              <div>
-                <h2>Welcome back</h2>
-              </div>
-            ):
-            <Route path="/login" element={<LogIn Input = {Input} error = {error}/>}/>
-          }
           </Routes>
           </div>
       </div>

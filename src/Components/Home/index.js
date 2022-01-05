@@ -30,10 +30,18 @@ function Home(){
 
     
     if (animeList.length === 0) {
-        const Loading = ({type, color}) => {
-            <ReactLoading type = {bars} color = {a14c4c} height={'20%'} width={'20%'}></ReactLoading>
-        }
-        return Loading
+    return(
+        <div className="wrapper">
+        <div className="circle"></div>
+        <div className="circle"></div>
+        <div className="circle"></div>
+        <div className="shadow"></div>
+        <div className="shadow"></div>
+        <div className="shadow"></div>
+        <span>Loading</span>
+    </div>
+    ) 
+
     }
 
     async function fetchAnime() {

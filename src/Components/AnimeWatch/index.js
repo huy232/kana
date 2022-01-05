@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
 import { supabase } from '../../supabaseClient'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import './animewatch.css'
 import ReactNetflixPlayer from "react-netflix-player"
 import axios from 'axios'         
@@ -31,9 +31,9 @@ function AnimeWatch() {
         .match({anime_title: data[0].anime_title, anime_episode: animeEpisode})
         setAnimeInfoPlayer(data[0].anime_title)
 
-        secondData[0].anime_url===undefined ? await axios.post(url, {animeURL: secondData[0].anime_url, animeTitle: data[0].anime_title, anime_episode: animeEpisode})
+         await axios.post(url, {animeURL: secondData[0].anime_url, animeTitle: data[0].anime_title, anime_episode: animeEpisode})
             .then(res => console.log(res.data))
-            .catch(err => console.log(err.data)) : console.log("")
+            .catch(err => console.log(err.data))
 
 
 
@@ -54,12 +54,6 @@ function AnimeWatch() {
 
 
     return (
-        <>
-        {/* {animeWatch === '' || animeWatch == null? <div>Loading movie</div> :
-        <video width="100%" height="auto" controls key = {animeWatch}>
-        <source src = {animeWatch} type = "video/mp4"/>
-        </video>} */}
-
         <ReactNetflixPlayer
         key = {animeWatch}
         src = {animeWatch}
@@ -75,10 +69,6 @@ function AnimeWatch() {
         playbackRateEnable = {false}
         backButton = {handleClick}
         />
-      
-        </>
-
-
     )
 
 }
