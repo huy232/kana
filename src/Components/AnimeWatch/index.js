@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
 import { supabase } from '../../supabaseClient'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import './animewatch.css'
 import ReactNetflixPlayer from "react-netflix-player"
 import axios from 'axios'         
 
 
 function AnimeWatch() {
-    const [animeInfoPlayer, setAnimeInfoPlayer] = useState([])
+    const navigate = useNavigate();
+    const [animeInfoPlayer, setAnimeInfoPlayer] = useState('')
     const [animeEpisode, setAnimeEpisode] = useState(0)
     const [animeWatch, setAnimeWatch] = useState('')
     let animeInfo = useParams()
@@ -28,25 +29,29 @@ function AnimeWatch() {
         .from(`anime_detail`)
         .select(`anime_title, anime_url, anime_episode`)
         .match({anime_title: data[0].anime_title, anime_episode: animeEpisode})
-        // console.log(data[0].anime_title)
-        // console.log(animeEpisode)
+        setAnimeInfoPlayer(data[0].anime_title)
+
+        secondData[0].anime_url===undefined ? await axios.post(url, {animeURL: secondData[0].anime_url, animeTitle: data[0].anime_title, anime_episode: animeEpisode})
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err.data)) : console.log("")
 
 
-        await axios.post(url, {animeURL: secondData[0].anime_url, animeTitle: data[0].anime_title, anime_episode: animeEpisode})
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err.data))
 
         const {data: finalData} = await supabase
         .from(`anime_detail`)
         .select(`anime_title, anime_url, anime_episode, anime_video`)
         .match({anime_title: data[0].anime_title, anime_episode: animeEpisode})
-        setAnimeWatch(finalData[0].anime_video)
+        
         const delayTime = setTimeout(()=> {
             setAnimeWatch(finalData[0].anime_video)
         }, 3000)
         return () => clearTimeout(delayTime)
-
     })
+
+    function handleClick(e) {
+        navigate('/');
+      }
+
 
     return (
         <>
@@ -54,12 +59,23 @@ function AnimeWatch() {
         <video width="100%" height="auto" controls key = {animeWatch}>
         <source src = {animeWatch} type = "video/mp4"/>
         </video>} */}
-        
+
         <ReactNetflixPlayer
         key = {animeWatch}
         src = {animeWatch}
         playerLanguage="en"
-        />      
+        fullPlayer = {true}
+        autoControlCloseEnabled = {true}
+        titleMedia = {animeInfoPlayer}
+        extraInfoMedia = {animeEpisode}
+        title = {animeInfoPlayer}
+        subTitle = {animeEpisode}
+        overlayEnabled = {true}
+        autoPlay = {false}
+        playbackRateEnable = {false}
+        backButton = {handleClick}
+        />
+      
         </>
 
 

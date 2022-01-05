@@ -10,6 +10,8 @@ import SwiperCore, { Pagination,Navigation } from 'swiper'
 import 'swiper/css'
 import { Link } from 'react-router-dom'
 import ReactPaginate from "react-paginate"
+import ReactLoading from 'react-loading';
+
 
 SwiperCore.use([Pagination,Navigation]);
 
@@ -28,8 +30,10 @@ function Home(){
 
     
     if (animeList.length === 0) {
-        console.log('Loading')
-        return <div>Loading</div>
+        const Loading = ({type, color}) => {
+            <ReactLoading type = {bars} color = {a14c4c} height={'20%'} width={'20%'}></ReactLoading>
+        }
+        return Loading
     }
 
     async function fetchAnime() {
@@ -68,7 +72,6 @@ function Home(){
     return (
         <>
         <div className="home-section">
-            {console.log(animeList.length)}
             <h2>Home Page</h2>
             <Swiper
             initialSlide={3}
