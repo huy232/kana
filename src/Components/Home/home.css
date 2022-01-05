@@ -1,31 +1,108 @@
-.swiper {
+  .home-section{
+    position: relative;
+    height: auto
+  }
+
+  .swiper{
     width: 100%;
     height: 100%;
   }
-  .swiper-slide {
+
+  .swiper-slide{
+
     text-align: center;
-    font-size: 18px;
-  
-    /* Center slide text vertically */
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .swiper-slide img {
+    float: left;
+    width: 100%;
+    height: 350px;
+    -o-object-fit: cover scale-down;
+       object-fit: cover scale-down;
+    opacity: 0.4
+  }
+
+  .swiper-slide-active img{
+    transition: all 0.5s ease-in-out;
+    opacity: 1
+
+  }
+
+  .anime-info-container{
+    background-image: linear-gradient(
+      77deg,rgba(0,0,0,.8) 25%,transparent 85%);
+    background-color: transparent;
+    width: 100%;
+  }
+
+  .anime-info-title, .anime-info-description{
+    color: white;
+    width: 50%
+  }
+
+  .anime-list{
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    align-items: center;
+  }
+
+  .anime-list img {
+    /* float: left; */
+    cursor: pointer;
     display: block;
-    box-sizing: border-box;
-    border: none;
+    padding: 5px 5px;
+    flex-grow: 1;
+    -o-object-fit: cover scale-down;
+       object-fit: cover scale-down;
+    width: 100%;
+    height: 235px;
+    transition: all 0.2s ease-in-out
+  }
+
+  .anime-list img:hover{
+    opacity: 0.7
+  }
+
+  .anime-item {
+    width: 200px
+  }
+
+  .navigationButtons {
+    width: 80%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
     margin: auto;
-    max-width: auto;
-    min-width: auto;
-    max-height: 350px;
-    min-height: 350px;
-    -o-object-fit: cover;
-       object-fit: cover;
+    padding-top: 40px;
+  }
+   
+  .navigationButtons a {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+    transition: all 0.5s
+  }
+   
+  .navigationButtons a:hover {
+    color: white;
+    background-color: red;
+  }
+   
+  .navigationActive a {
+    color: white;
+    background-color: rgb(70, 34, 34);
+  }
+   
+  .navigationDisabled a {
+    color: grey;
+    background-color: grey;
   }
   
-
-  .swiper {
-    margin-left: auto;
-    margin-right: auto;
-  }

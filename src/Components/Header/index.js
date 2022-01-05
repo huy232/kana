@@ -12,9 +12,6 @@ function Header(){
             <NavLink exact="true" to="/">
             <i className="fas fa-tv"> Trang chủ</i>
             </NavLink>
-            <NavLink to="/anime-list">
-            <i className="fas fa-th-list"> Danh sách Anime</i>
-            </NavLink>
             <NavLink className="push-second" to="/login">
             <i className="fas fa-sign-in-alt"> Đăng nhập</i>           
             </NavLink>
