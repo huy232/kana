@@ -15,6 +15,7 @@ function AnimeWatch() {
     let animeInfo = useParams()
 
     useEffect(async()=>{
+        let unmounted = false;
         let url = 'http://localhost:8000'
         let infoMainID = animeInfo.id
         let infoMainEpisode = ("Tập " + animeInfo.episode)
@@ -31,9 +32,9 @@ function AnimeWatch() {
         .match({anime_title: data[0].anime_title, anime_episode: animeEpisode})
         setAnimeInfoPlayer(data[0].anime_title)
 
-         await axios.post(url, {animeURL: secondData[0].anime_url, animeTitle: data[0].anime_title, anime_episode: animeEpisode})
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err.data))
+        await axios.post(url, {animeURL: secondData[0].anime_url, animeTitle: data[0].anime_title, anime_episode: animeEpisode})
+            .then(res => res.data)
+            .catch(err => err.data)
 
 
 
@@ -44,8 +45,11 @@ function AnimeWatch() {
         
         const delayTime = setTimeout(()=> {
             setAnimeWatch(finalData[0].anime_video)
-        }, 3000)
-        return () => clearTimeout(delayTime)
+        }, 2000)
+        return () => {
+            unmounted = true
+            clearTimeout(delayTime)
+        }
     })
 
     function handleClick(e) {
@@ -54,12 +58,13 @@ function AnimeWatch() {
 
 
     return (
+        <>
         <ReactNetflixPlayer
         key = {animeWatch}
         src = {animeWatch}
         playerLanguage="en"
         fullPlayer = {true}
-        autoControlCloseEnabled = {true}
+        autoControllCloseEnabled = {true}
         titleMedia = {animeInfoPlayer}
         extraInfoMedia = {animeEpisode}
         title = {animeInfoPlayer}
@@ -68,7 +73,12 @@ function AnimeWatch() {
         autoPlay = {false}
         playbackRateEnable = {false}
         backButton = {handleClick}
+        primaryColor="#b81f40"
+        secundaryColor="#ffffff"
+        onCrossClick = {handleClick}
         />
+        </>
+
     )
 
 }

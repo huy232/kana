@@ -10,7 +10,6 @@ import SwiperCore, { Pagination,Navigation } from 'swiper'
 import 'swiper/css'
 import { Link } from 'react-router-dom'
 import ReactPaginate from "react-paginate"
-import ReactLoading from 'react-loading';
 
 
 SwiperCore.use([Pagination,Navigation]);
@@ -60,7 +59,7 @@ function Home(){
             setAnimeList(data)
     }
 
-    const animePerPage = 100
+    const animePerPage = 27
     const numberOfRecordVisited = page*animePerPage
     const displayAnime = animeList.slice(numberOfRecordVisited, numberOfRecordVisited + animePerPage).map((element, i)=>{
         return (
@@ -107,9 +106,10 @@ function Home(){
                 }>
                 <h1 className = "anime-info-title">{animeSwiper[swiperIndex].anime_title}</h1>
             </div>
-            <h2>Anime List of Today</h2>
+            <h2>Anime List</h2>
             <div className="anime-list">
                 {displayAnime}
+                <div className = "spacerPagination"/>
                 <ReactPaginate
                     previousLabel={"Previous"}
                     nextLabel={"Next"}

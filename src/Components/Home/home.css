@@ -175,7 +175,8 @@
     display: flex;
     flex-wrap: wrap;
     /* justify-content: center; */
-    align-items: center;
+    /* align-items: center; */
+    text-align: center;
   }
 
   .anime-list img {
@@ -196,6 +197,10 @@
   }
 
   .anime-item {
+    margin-left: auto;
+    margin-right: auto;
+    float: left;
+    color: #F2AA4C;
     width: 200px
   }
 
@@ -213,24 +218,29 @@
     padding: 10px;
     margin: 8px;
     border-radius: 5px;
-    border: 1px solid black;
-    color: black;
+    border: 1px solid #F2AA4C;
+    color: #F2AA4C;
     cursor: pointer;
     transition: all 0.5s
   }
    
   .navigationButtons a:hover {
-    color: white;
-    background-color: red;
+    color: #F2AA4C;
+    background-color: #964040;
   }
    
   .navigationActive a {
-    color: white;
-    background-color: rgb(70, 34, 34);
+    color: #F2AA4C;
+    background-color: #964040;
+    transition: all 1s ease;
   }
    
   .navigationDisabled a {
-    color: grey;
-    background-color: grey;
+    color: #F2AA4C;
+    background-color: #F2AA4C;
+  }
+
+  h2 {
+    color: #964040;
   }
   
