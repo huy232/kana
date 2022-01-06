@@ -15,7 +15,6 @@ function AnimeWatch() {
     let animeInfo = useParams()
 
     useEffect(async()=>{
-        let unmounted = false;
         let url = 'http://localhost:8000'
         let infoMainID = animeInfo.id
         let infoMainEpisode = ("Tập " + animeInfo.episode)
@@ -47,7 +46,6 @@ function AnimeWatch() {
             setAnimeWatch(finalData[0].anime_video)
         }, 2000)
         return () => {
-            unmounted = true
             clearTimeout(delayTime)
         }
     })

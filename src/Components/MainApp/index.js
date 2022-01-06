@@ -11,7 +11,8 @@ import {
   function MainApp() {
     return (     
       <div id = "main">
-            <Header/>
+            {window.location.pathname === "/watch/:id/:episode" ? null : <Header/>}
+
             <div className="spacer">
             &nbsp;
             </div>
