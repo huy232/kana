@@ -1,0 +1,21 @@
+.episode-item a h3{
+    background-color: #F2AA4C;
+    border-radius: 50px;
+    color: #ffff;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 55px;
+    margin-right: 55px;
+}
+.react-multi-carousel-list{
+    margin-top: 50px !important
+}
+
+.anime-list-episode{
+    overflow: scroll;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 800px
+}

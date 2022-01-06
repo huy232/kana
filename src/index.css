@@ -11,7 +11,7 @@ html{
 }
 
 html, body {
-  background-color: gray;
+  background-color: #101820;
   scroll-behavior: smooth;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,6 +28,9 @@ code {
   height: 95px;
 }
 
+.spacerPagination{
+  width: 100%;
+}
+
 .header{
-  /* display: none */
 }

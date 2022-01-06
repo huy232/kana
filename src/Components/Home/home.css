@@ -1,3 +1,131 @@
+.wrapper{
+  width:200px;
+  height:60px;
+  position: absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+}
+.circle{
+  width:20px;
+  height:20px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #fff;
+  left:15%;
+  transform-origin: 50%;
+  -webkit-animation: circle .5s alternate infinite ease;
+          animation: circle .5s alternate infinite ease;
+}
+
+@-webkit-keyframes circle{
+  0%{
+      top:60px;
+      height:5px;
+      border-radius: 50px 50px 25px 25px;
+      transform: scaleX(1.7);
+  }
+  40%{
+      height:20px;
+      border-radius: 50%;
+      transform: scaleX(1);
+  }
+  100%{
+      top:0%;
+  }
+}
+
+@keyframes circle{
+  0%{
+      top:60px;
+      height:5px;
+      border-radius: 50px 50px 25px 25px;
+      transform: scaleX(1.7);
+  }
+  40%{
+      height:20px;
+      border-radius: 50%;
+      transform: scaleX(1);
+  }
+  100%{
+      top:0%;
+  }
+}
+.circle:nth-child(2){
+  left:45%;
+  -webkit-animation-delay: .2s;
+          animation-delay: .2s;
+}
+.circle:nth-child(3){
+  left:auto;
+  right:15%;
+  -webkit-animation-delay: .3s;
+          animation-delay: .3s;
+}
+.shadow{
+  width:20px;
+  height:4px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  top:62px;
+  transform-origin: 50%;
+  z-index: -1;
+  left:15%;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+  -webkit-animation: shadow .5s alternate infinite ease;
+          animation: shadow .5s alternate infinite ease;
+}
+
+@-webkit-keyframes shadow{
+  0%{
+      transform: scaleX(1.5);
+  }
+  40%{
+      transform: scaleX(1);
+      opacity: .7;
+  }
+  100%{
+      transform: scaleX(.2);
+      opacity: .4;
+  }
+}
+
+@keyframes shadow{
+  0%{
+      transform: scaleX(1.5);
+  }
+  40%{
+      transform: scaleX(1);
+      opacity: .7;
+  }
+  100%{
+      transform: scaleX(.2);
+      opacity: .4;
+  }
+}
+.shadow:nth-child(4){
+  left: 45%;
+  -webkit-animation-delay: .2s;
+          animation-delay: .2s
+}
+.shadow:nth-child(5){
+  left:auto;
+  right:15%;
+  -webkit-animation-delay: .3s;
+          animation-delay: .3s;
+}
+.wrapper span{
+  position: absolute;
+  top:75px;
+  font-family: 'Lato';
+  font-size: 20px;
+  letter-spacing: 12px;
+  color: #fff;
+  left:15%;
+}  
+    
   .home-section{
     position: relative;
     height: auto
@@ -47,7 +175,8 @@
     display: flex;
     flex-wrap: wrap;
     /* justify-content: center; */
-    align-items: center;
+    /* align-items: center; */
+    text-align: center;
   }
 
   .anime-list img {
@@ -68,6 +197,10 @@
   }
 
   .anime-item {
+    margin-left: auto;
+    margin-right: auto;
+    float: left;
+    color: #F2AA4C;
     width: 200px
   }
 
@@ -85,24 +218,29 @@
     padding: 10px;
     margin: 8px;
     border-radius: 5px;
-    border: 1px solid black;
-    color: black;
+    border: 1px solid #F2AA4C;
+    color: #F2AA4C;
     cursor: pointer;
     transition: all 0.5s
   }
    
   .navigationButtons a:hover {
-    color: white;
-    background-color: red;
+    color: #F2AA4C;
+    background-color: #964040;
   }
    
   .navigationActive a {
-    color: white;
-    background-color: rgb(70, 34, 34);
+    color: #F2AA4C;
+    background-color: #964040;
+    transition: all 1s ease;
   }
    
   .navigationDisabled a {
-    color: grey;
-    background-color: grey;
+    color: #F2AA4C;
+    background-color: #F2AA4C;
+  }
+
+  h2 {
+    color: #964040;
   }
   
