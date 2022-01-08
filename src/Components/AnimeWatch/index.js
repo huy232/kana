@@ -1,85 +1,78 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react"
-import { supabase } from '../../supabaseClient'
-import { useParams, useNavigate } from 'react-router-dom'
-import './animewatch.css'
-import ReactNetflixPlayer from "react-netflix-player"
-import axios from 'axios'         
+import { useState, useEffect } from "react";
+import { supabase } from "../../supabaseClient";
+import { useParams, useNavigate } from "react-router-dom";
+import "./animewatch.css";
+import ReactNetflixPlayer from "react-netflix-player";
+import axios from "axios";
 
+const url = "http://localhost:8000/post-anime";
 
 function AnimeWatch() {
-    const navigate = useNavigate();
-    const [animeInfoPlayer, setAnimeInfoPlayer] = useState('')
-    const [animeEpisode, setAnimeEpisode] = useState(0)
-    const [animeWatch, setAnimeWatch] = useState('')
-    let animeInfo = useParams()
+  const animeInfo = useParams();
+  const infoMainID = animeInfo.id;
+  const animeEpisode = "Tập " + animeInfo.episode;
 
-    useEffect(async()=>{
-        let url = 'http://localhost:8000'
-        let infoMainID = animeInfo.id
-        let infoMainEpisode = ("Tập " + animeInfo.episode)
-        setAnimeEpisode(infoMainEpisode)
+  const navigate = useNavigate();
+  const [animeInfoPlayer, setAnimeInfoPlayer] = useState("");
+  const [animeWatch, setAnimeWatch] = useState("");
 
-        const {data} = await supabase
-        .from('animes')
-        .select('id, anime_title')
-        .match({id: infoMainID})
-        
-        const {data: secondData} = await supabase
-        .from(`anime_detail`)
-        .select(`anime_title, anime_url, anime_episode`)
-        .match({anime_title: data[0].anime_title, anime_episode: animeEpisode})
-        setAnimeInfoPlayer(data[0].anime_title)
+  useEffect(async () => {
+    const { data } = await supabase
+      .from("animes")
+      .select("id, anime_title")
+      .match({ id: infoMainID });
 
-        await axios.post(url, {animeURL: secondData[0].anime_url, animeTitle: data[0].anime_title, anime_episode: animeEpisode})
-            .then(res => res.data)
-            .catch(err => err.data)
+    const { data: secondData } = await supabase
+      .from(`anime_detail`)
+      .select(`anime_title, anime_url, anime_episode`)
+      .match({ anime_title: data[0].anime_title, anime_episode: animeEpisode });
+    setAnimeInfoPlayer(data[0].anime_title);
 
+    await axios
+      .post(url, {
+        animeURL: secondData[0].anime_url,
+        animeTitle: data[0].anime_title,
+        anime_episode: animeEpisode,
+      })
+      .then((res) => res.data)
+      .catch((err) => err.data);
+    const { data: finalData } = await supabase
+      .from(`anime_detail`)
+      .select(`anime_title, anime_url, anime_episode, anime_video`)
+      .match({
+        anime_title: data[0].anime_title,
+        anime_episode: animeEpisode,
+      });
+    setAnimeWatch(finalData[0].anime_video);
+  }, []);
 
+  function handleClick(e) {
+    navigate("/");
+  }
 
-        const {data: finalData} = await supabase
-        .from(`anime_detail`)
-        .select(`anime_title, anime_url, anime_episode, anime_video`)
-        .match({anime_title: data[0].anime_title, anime_episode: animeEpisode})
-        
-        const delayTime = setTimeout(()=> {
-            setAnimeWatch(finalData[0].anime_video)
-        }, 2000)
-        return () => {
-            clearTimeout(delayTime)
-        }
-    })
-
-    function handleClick(e) {
-        navigate('/');
-      }
-
-
-    return (
-        <>
-        <ReactNetflixPlayer
-        key = {animeWatch}
-        src = {animeWatch}
+  return (
+    <>
+      {/* <ReactNetflixPlayer
+        key={animeWatch}
+        src={animeWatch}
         playerLanguage="en"
-        fullPlayer = {true}
-        autoControllCloseEnabled = {true}
-        titleMedia = {animeInfoPlayer}
-        extraInfoMedia = {animeEpisode}
-        title = {animeInfoPlayer}
-        subTitle = {animeEpisode}
-        overlayEnabled = {true}
-        autoPlay = {false}
-        playbackRateEnable = {false}
-        backButton = {handleClick}
+        fullPlayer={true}
+        titleMedia={animeInfoPlayer}
+        extraInfoMedia={animeEpisode}
+        title={animeInfoPlayer}
+        subTitle={animeEpisode}
+        overlayEnabled={true}
+        backButton={handleClick}
         primaryColor="#b81f40"
         secundaryColor="#ffffff"
-        onCrossClick = {handleClick}
-        />
-        </>
-
-    )
-
+        onCrossClick={handleClick}
+      /> */}
+      <video key={animeWatch} controls>
+        <source src={animeWatch}></source>
+      </video>
+    </>
+  );
 }
 
-
-export default AnimeWatch
+export default AnimeWatch;
